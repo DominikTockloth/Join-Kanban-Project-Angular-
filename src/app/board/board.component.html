@@ -1,0 +1,305 @@
+<div class="main">
+    <div class="headline">
+        <h1>Board</h1>
+        <div class="input-box">
+            <div class="input"><input type="text" placeholder="Search Task by title..."
+                (input)="filterTasks($event)"><img src="./../../../assets/img/search.png">
+            </div><button routerLink="/main/tasks">Add Task</button>
+        </div>
+    </div>
+    <!---------------------------------------  Filtered tasks content  ---------------------------------------------->
+    <div class="filtered-tasks" *ngIf="filteredTasks.length > 0">
+        <div class="card" *ngFor="let task of filteredTasks" (click)="openCardDetail(task.id!)" >
+           
+            <h4 [ngStyle]="{'background-color': getBgColorCategory(task.category)}">{{task.category}}</h4>
+            <h2>{{task.title}}</h2>
+            <div class="desc">
+                <p>{{task.description}}</p>
+            </div>
+            <div class="info">
+                <span *ngIf="!task.contacts || task.contacts.length === 0" class="no-subtask">No contacts
+                    assigned
+                </span>
+                <div class="avatars">
+                    <div class="avatar-box" *ngFor="let contact of task.contacts">
+                        <span [ngStyle]="{'background-color': contact.bgColor}">{{getInitials(contact.name)}}</span>
+                    </div>
+                </div>
+                <div class="prio">
+                    <img src="./../../assets/img/low_green.svg" *ngIf="task.priority === 'low'">
+                    <img src="./../../assets/img/medium_yellow.svg" *ngIf="task.priority === 'medium'">
+                    <img src="./../../assets/img/urgent_red.svg" *ngIf="task.priority === 'urgent'">
+                </div>
+            </div>
+            <span *ngIf="!task.subtasks || task.subtasks.length === 0" class="no-subtask">No subtasks to
+                do!!</span>
+            <div class="subtask-box" *ngIf="task.subtasks && task.subtasks.length > 0">
+
+                <div class="pro-bar"></div>
+                <div class="sub-counter">
+                    <span>1/{{task.subtasks.length}}</span><span>Subtasks</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="progress-content" *ngIf="filteredTasks.length === 0">
+        <!------------------------------------    Content of To Do List   ------------------------------------------->
+        <div class="progress">
+            <div class="progress-head">
+                <h3>To do</h3> <img src="./../../assets/img/plus-button.png" (click)="openAddTaskDialog('to do')">
+            </div>
+            <!------------------------------  Task List content  ----------------------------------------------->
+            <div class="list-content" cdkDropList [cdkDropListData]="statusToDo" (cdkDropListDropped)="drop($event)"
+                id="toDoList" [cdkDropListConnectedTo]="['inProgressList', 'awaitingFeedbackList', 'doneList']">
+
+                <div class="no-task" *ngIf="statusToDo.length === 0">No tasks to do!</div>
+                <!--------------------------------  Content of card starts here  ---------------------------------->
+                <div class="card" *ngFor="let task of  statusToDo" (click)="openCardDetail(task.id!)"
+                    [cdkDragData]="task" cdkDrag [cdkDragStartDelay]="0">
+                    <img src="./../../assets/img/back-arrow.png" class="mobile-btn"
+                        (click)="moveToNextList(task); $event.stopPropagation()" *ngIf="isMobileView">
+                    <h4 [ngStyle]="{'background-color': getBgColorCategory(task.category)}">{{task.category}}</h4>
+                    <h2>{{task.title}}</h2>
+                    <div class="desc">
+                        <p>{{task.description}}</p>
+                    </div>
+                    <div class="info">
+                        <span *ngIf="!task.contacts || task.contacts.length === 0" class="no-subtask">No contacts
+                            assigned
+                        </span>
+                        <div class="avatars">
+                            <div class="avatar-box" *ngFor="let contact of task.contacts">
+                                <span
+                                    [ngStyle]="{'background-color': contact.bgColor}">{{getInitials(contact.name)}}</span>
+                            </div>
+                        </div>
+                        <div class="prio">
+                            <img src="./../../assets/img/low_green.svg" *ngIf="task.priority === 'low'">
+                            <img src="./../../assets/img/medium_yellow.svg" *ngIf="task.priority === 'medium'">
+                            <img src="./../../assets/img/urgent_red.svg" *ngIf="task.priority === 'urgent'">
+                        </div>
+                    </div>
+                    <span *ngIf="!task.subtasks || task.subtasks.length === 0" class="no-subtask">No subtasks to
+                        do!!</span>
+                    <div class="subtask-box" *ngIf="task.subtasks && task.subtasks.length > 0">
+
+                        <div class="pro-bar"></div>
+                        <div class="sub-counter">
+                            <span>1/{{task.subtasks.length}}</span><span>Subtasks</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-----------------------------------------------  Content of In Progress List  ----------------------------------------->
+        <div class="progress">
+            <div class="progress-head">
+                <h3>In progress</h3> <img src="./../../assets/img/plus-button.png"
+                    (click)="openAddTaskDialog('in progress')">
+            </div>
+            <!---------------------------------   Task List content  ------------------------------------------->
+            <div class="list-content" cdkDropList [cdkDropListData]="statusInProgress"
+                (cdkDropListDropped)="drop($event)" id="inProgressList"
+                [cdkDropListConnectedTo]="['toDoList', 'awaitingFeedbackList', 'doneList']">
+                <div class="no-task" *ngIf="statusInProgress.length === 0">No tasks in progress!</div>
+                <div class="card" *ngFor="let task of  statusInProgress" (click)="openCardDetail(task.id!)" cdkDrag
+                    [cdkDragData]="task">
+                    <img src="./../../assets/img/back-arrow.png" class="mobile-btn"
+                        (click)="moveToNextList(task); $event.stopPropagation()" *ngIf="isMobileView">
+                    <img src="./../../assets/img/back-arrow.png" class="mobile-btn up"
+                        (click)="moveToPreviousList(task); $event.stopPropagation()" *ngIf="isMobileView">
+                    <h4 [ngStyle]="{'background-color': getBgColorCategory(task.category)}">{{task.category}}</h4>
+                    <h2>{{task.title}}</h2>
+                    <div class="desc">
+                        <p>{{task.description}}</p>
+                    </div>
+                    <div class="info">
+                        <span *ngIf="!task.contacts || task.contacts.length === 0" class="no-subtask">No contacts
+                            assigned
+                            !!</span>
+                        <div class="avatars">
+                            <div class="avatar-box" *ngFor="let contact of task.contacts">
+                                <span
+                                    [ngStyle]="{'background-color': contact.bgColor}">{{getInitials(contact.name)}}</span>
+                            </div>
+                        </div>
+                        <div class="prio">
+                            <img src="./../../assets/img/low_green.svg" *ngIf="task.priority === 'low'">
+                            <img src="./../../assets/img/medium_yellow.svg" *ngIf="task.priority === 'medium'">
+                            <img src="./../../assets/img/urgent_red.svg" *ngIf="task.priority === 'urgent'">
+                        </div>
+                    </div>
+                    <span *ngIf="!task.subtasks || task.subtasks.length === 0" class="no-subtask">No subtasks to
+                        do!!</span>
+                    <div class="subtask-box" *ngIf="task.subtasks && task.subtasks.length > 0">
+
+                        <div class="pro-bar"></div>
+                        <div class="sub-counter">
+                            <span>1/{{task.subtasks.length}}</span><span>Subtasks</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!----------------------------------------  Content of Awaiting List  ------------------------------------>
+        <div class="progress">
+            <div class="progress-head">
+                <h3>Awaiting feedback</h3> <img src="./../../assets/img/plus-button.png"
+                    (click)="openAddTaskDialog('awaiting feedback')">
+            </div>
+            <!-------------------------------------   Task List Content  ------------------------------------------->
+            <div class="list-content" cdkDropList [cdkDropListData]="statusAwaiting" (cdkDropListDropped)="drop($event)"
+                id="awaitingFeedbackList" [cdkDropListConnectedTo]="['toDoList', 'inProgressList', 'doneList']">
+                <div class="no-task" *ngIf="statusAwaiting.length === 0">No tasks awaiting feedback!</div>
+                <div class="card" *ngFor="let task of  statusAwaiting" (click)="openCardDetail(task.id!)" cdkDrag
+                    [cdkDragData]="task" cdkDragPreviewClass="card-drag">
+                    <img src="./../../assets/img/back-arrow.png" class="mobile-btn"
+                        (click)="moveToNextList(task); $event.stopPropagation()" *ngIf="isMobileView">
+                    <img src="./../../assets/img/back-arrow.png" class="mobile-btn up"
+                        (click)="moveToPreviousList(task); $event.stopPropagation()" *ngIf="isMobileView">
+                    <h4 [ngStyle]="{'background-color': getBgColorCategory(task.category)}">{{task.category}}</h4>
+                    <h2>{{task.title}}</h2>
+                    <div class="desc">
+                        <p>{{task.description}}</p>
+                    </div>
+                    <div class="info">
+                        <span *ngIf="!task.contacts || task.contacts.length === 0" class="no-subtask">No contacts
+                            assigned
+                            !!</span>
+                        <div class="avatars">
+                            <div class="avatar-box" *ngFor="let contact of task.contacts">
+                                <span
+                                    [ngStyle]="{'background-color': contact.bgColor}">{{getInitials(contact.name)}}</span>
+                            </div>
+                        </div>
+                        <div class="prio">
+                            <img src="./../../assets/img/low_green.svg" *ngIf="task.priority === 'low'">
+                            <img src="./../../assets/img/medium_yellow.svg" *ngIf="task.priority === 'medium'">
+                            <img src="./../../assets/img/urgent_red.svg" *ngIf="task.priority === 'urgent'">
+                        </div>
+                    </div>
+                    <span *ngIf="!task.subtasks || task.subtasks.length === 0" class="no-subtask">No subtasks to
+                        do!!</span>
+                    <div class="subtask-box" *ngIf="task.subtasks && task.subtasks.length > 0">
+
+                        <div class="pro-bar"></div>
+                        <div class="sub-counter">
+                            <span>1/{{task.subtasks.length}}</span><span>Subtasks</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!---------------------------------------------  Content of Done List  -------------------------------------->
+        <div class="progress">
+            <div class="progress-head">
+                <h3>Done</h3>
+            </div>
+            <!------------------------------------------   Task List content  ---------------------------------------->
+            <div class="list-content" cdkDropList [cdkDropListData]="statusDone" (cdkDropListDropped)="drop($event)"
+                id="doneList" [cdkDropListConnectedTo]="['toDoList', 'inProgressList', 'awaitingFeedbackList']">
+                <div class="no-task" *ngIf="statusDone.length === 0">No tasks done!</div>
+                <div class="card" *ngFor="let task of  statusDone" (click)="openCardDetail(task.id!)" cdkDrag
+                    [cdkDragData]="task">
+                    <img src="./../../assets/img/back-arrow.png" class="mobile-btn up"
+                        (click)="moveToPreviousList(task); $event.stopPropagation()" *ngIf="isMobileView">
+                    <h4 [ngStyle]="{'background-color': getBgColorCategory(task.category)}">{{task.category}}</h4>
+                    <h2>{{task.title}}</h2>
+                    <div class="desc">
+                        <p>{{task.description}}</p>
+                    </div>
+                    <div class="info">
+                        <span *ngIf="!task.contacts || task.contacts.length === 0" class="no-subtask">No contacts
+                            assigned
+                            !!</span>
+                        <div class="avatars">
+                            <div class="avatar-box" *ngFor="let contact of task.contacts">
+                                <span
+                                    [ngStyle]="{'background-color': contact.bgColor}">{{getInitials(contact.name)}}</span>
+                            </div>
+                        </div>
+                        <div class="prio">
+                            <img src="./../../assets/img/low_green.svg" *ngIf="task.priority === 'low'">
+                            <img src="./../../assets/img/medium_yellow.svg" *ngIf="task.priority === 'medium'">
+                            <img src="./../../assets/img/urgent_red.svg" *ngIf="task.priority === 'urgent'">
+                        </div>
+                    </div>
+                    <span *ngIf="!task.subtasks || task.subtasks.length === 0" class="no-subtask">No subtasks to
+                        do!!</span>
+                    <div class="subtask-box" *ngIf="task.subtasks && task.subtasks.length > 0">
+
+                        <div class="pro-bar"></div>
+                        <div class="sub-counter">
+                            <span>1/{{task.subtasks.length}}</span><span>Subtasks</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!------------------------------------   Style for detail card overlay  ----------------------------------------------->
+
+    <div class="overlay" *ngIf="isTaskDetailCardOpen">
+        <div class="detail-card">
+            <div class="category">
+                <h4 [ngStyle]="{'background-color': getBgColorCategory(selectedTask.category)}">
+                    {{selectedTask.category}}
+                </h4><span (click)="closeCardDetail()">X</span>
+            </div>
+            <h2>{{selectedTask.title}}</h2>
+            <div class="desc">
+                <p>{{selectedTask.description}}</p>
+            </div>
+            <div class="date"><span class="fs22">Due date :</span> <span class="fs22">
+                    {{ convertToDateString(selectedTask.date)}}</span></div>
+            <div class="prio">
+                <span class="fs22" *ngIf="selectedTask.priority === 'low'">Priority :</span><span class="fs24 black"
+                    *ngIf="selectedTask.priority === 'low'">{{capitalizeFirstLetter(selectedTask.priority)}}</span>
+                <img src="./../../assets/img/low_green.svg" *ngIf="selectedTask.priority === 'low'">
+                <span class="fs22" *ngIf="selectedTask.priority === 'medium'">Priority :</span><span class="fs24 black"
+                    *ngIf="selectedTask.priority === 'medium'">{{capitalizeFirstLetter(selectedTask.priority)}}</span>
+                <img src="./../../assets/img/medium_yellow.svg" *ngIf="selectedTask.priority === 'medium'">
+                <span class="fs22" *ngIf="selectedTask.priority === 'urgent'">Priority :</span><span class="fs24 black"
+                    *ngIf="selectedTask.priority === 'urgent'">{{capitalizeFirstLetter(selectedTask.priority)}}</span>
+                <img src="./../../assets/img/urgent_red.svg" *ngIf="selectedTask.priority === 'urgent'">
+            </div>
+            <span *ngIf="!selectedTask.contacts ||selectedTask.contacts.length === 0" class="no-subtask">No
+                contacts assigned !!</span>
+            <div class="contacts" *ngIf="(selectedTask?.contacts?.length ?? 0) > 0">
+                <span class="fs24">Assigned to :</span>
+                <div class="avatars">
+                    <div class="avatar-box" *ngFor="let contact of selectedTask.contacts">
+                        <span [ngStyle]="{'background-color': contact.bgColor}"
+                            class="letters">{{getInitials(contact.name)}}</span>
+                        <span class="fs22">{{capitalizeFirstLetter(contact.name)}}</span>
+                    </div>
+                </div>
+            </div>
+            <span *ngIf="!selectedTask.subtasks || selectedTask.subtasks.length === 0" class="no-subtask">No
+                subtasks to
+                do!</span>
+            <span class="fs24" *ngIf="(selectedTask?.subtasks?.length ?? 0) > 0">Subtasks :</span>
+            <div class="subtask-box">
+                <div class="subtask-content" *ngFor="let subtask of selectedTask.subtasks">
+                    <input type="checkbox"><span class="fs22">{{subtask}}</span>
+                </div>
+            </div>
+            <div class="buttons"><button (click)="openEditTaskDialog(selectedTask.id!)">Edit <img
+                        src="./../../assets/img/edit-pencil.png"></button><button
+                    (click)="openDeleteTaskDialog(selectedTask.id!)">Delete <img
+                        src="./../../assets/img/delete.png"></button></div>
+        </div>
+
+
+    </div>

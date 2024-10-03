@@ -1,0 +1,113 @@
+/******************************  Responsive style for add task component  ************************/
+
+@media(max-width:1460px) {
+    .main {
+        width: calc(100% - 20px) !important;
+    }
+}
+
+@media(max-width:1250px) {
+    form {
+        flex-direction: column !important;
+    }
+
+    .left {
+        width: 100% !important;
+    }
+
+    .right {
+        width: 100% !important;
+    }
+
+    input,
+    textarea {
+        width: 97% !important;
+    }
+
+    .btn-box {
+        width: 103% !important;
+    }
+}
+
+@media(max-width:950px) {
+    .main {
+        left: 0 !important;
+        align-items: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 20px !important;
+    }
+
+    form {
+        width: unset !important;
+        margin-bottom: 160px !important;
+        overflow-x: hidden !important;
+        padding: 20px !important;
+        overflow-y: scroll !important;
+    }
+
+    .drop-menu-contacts {
+        width: 103% !important;
+    }
+
+    .contact-box {
+        input {
+            width: 16px !important;
+            height: 16px !important;
+        }
+    }
+
+    .drop-menu-category {
+        width: 103% !important;
+    }
+}
+
+@media(max-width:450px) {
+    h1 {
+        font-size: 40px !important;
+    }
+
+    form {
+        width: 260px !important;
+        margin-left: -20px !important;
+
+        input::placeholder {
+            font-size: 14px !important;
+        }
+
+        textarea::placeholder {
+            font-size: 14px !important;
+        }
+    }
+
+    .arrow {
+        right: 5px !important;
+    }
+
+    .cont-name {
+        font-size: 15px !important;
+    }
+
+    .drop-menu-category {
+        width: 106% !important;
+
+        li {
+            font-size: 16px !important;
+        }
+    }
+
+    .drop-menu-contacts {
+        width: 106% !important;
+    }
+
+    .avatar {
+        height: 30px !important;
+        width: 30px !important;
+        font-size: 12px !important;
+    }
+
+    .prio-btn {
+        font-size: 11px !important;
+        padding: 10px !important;
+    }
+}

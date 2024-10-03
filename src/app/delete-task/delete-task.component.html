@@ -1,0 +1,17 @@
+<div class="main" [ngClass]="{'hidden': isTaskDeleted}">
+    <div class="box">
+        <div class="content">
+            <span>Do you really want to <span class="delete">delete</span> this task?</span>
+            <div class="btn"><button (click)="deleteTask(selectedTask.id!)" class="yes">Yes</button>
+                <button (click)="onNoClick()" class="no">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="message" *ngIf="isTaskDeleted">
+    <div>
+        <div class="content">
+            Task<span style="color: greenyellow;">successfully</span> deleted!
+        </div>
+    </div>
+</div>

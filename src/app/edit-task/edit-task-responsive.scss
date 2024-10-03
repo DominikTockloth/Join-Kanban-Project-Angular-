@@ -1,0 +1,135 @@
+/********************************  Responsive style of edit task overlay  *************************/
+@media(max-width:570px) {
+    .card {
+        width: 380px !important;
+    }
+
+    .prio-btn {
+        button {
+            font-size: 15px !important;
+            padding: 13px !important;
+        }
+    }
+}
+
+@media(max-width:460px) {
+    .card {
+        width: 320px !important;
+    }
+
+    .prio-btn {
+        button {
+            font-size: 13px !important;
+            padding: 10px !important;
+
+            img {
+                width: 12px !important;
+            }
+        }
+    }
+
+    .fs-22 {
+        font-size: 18px !important;
+    }
+
+    .content {
+        gap: 4px !important;
+    }
+}
+
+@media(max-width:390px) {
+    .card {
+        width: 280px !important;
+    }
+
+    .name {
+        font-size: 16px !important;
+    }
+
+    .avatar {
+        height: 15px !important;
+        width: 15px !important;
+        font-size: 14px !important;
+    }
+
+    .subtasks {
+        li {
+            font-size: 15px !important;
+
+            img {
+                height: 15px !important;
+                width: 15px !important;
+                object-fit: contain !important;
+            }
+        }
+    }
+}
+
+/*****************************************   Style for added task message    ***********************************************************/
+.overlay {
+    position: absolute;
+    z-index: 10;
+    inset: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    .message {
+        position: fixed;
+        /* Position fixed so that it stays on top of other elements */
+        top: -200px;
+        /* Startposition außerhalb des sichtbaren Bereichs */
+        left: 50%;
+        transform: translateX(-50%);
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px;
+        color: white;
+        background-color: rgb(51, 49, 49);
+        border-radius: 8px;
+        opacity: 0;
+        /* Initially hidden */
+        animation: slideDown 0.5s forwards, slideUp 0.5s 2.0s forwards;
+
+        /* Slide down for 0.5s, wait 3.5s, then slide up */
+        .content {
+            display: flex;
+            gap: 8px;
+            width: 200px;
+
+            .green {
+                color: greenyellow;
+            }
+        }
+    }
+
+    /* Define the slide down animation */
+    @keyframes slideDown {
+        0% {
+            top: -200px;
+            opacity: 0;
+        }
+
+        100% {
+            top: 20px;
+            /* Final position visible on the screen */
+            opacity: 1;
+        }
+    }
+
+    /* Define the slide up animation */
+    @keyframes slideUp {
+        0% {
+            top: 20px;
+            opacity: 1;
+        }
+
+        100% {
+            top: -200px;
+            opacity: 0;
+        }
+    }
+}

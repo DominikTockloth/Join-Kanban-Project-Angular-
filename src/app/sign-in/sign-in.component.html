@@ -1,0 +1,54 @@
+<div class="main">
+    <img src="./../../assets/img/logo.png" id="logo">
+
+
+    <form class="form" [formGroup]="signInForm" (ngSubmit)="addUser()">
+        <button class="back"> <img src="./../../assets/img/back-arrow.png" routerLink="/log-in"></button>
+        <h1>Sign In</h1>
+        <div class="border-box">
+            <div class="border"></div>
+        </div>
+        <input type="text" placeholder="Name" formControlName="name" [(ngModel)]="name" name="name" required>
+        <div class="error" *ngIf="signInForm.get('name')?.invalid && signInForm.get('name')?.touched">
+            <p style="color: red;">Name is required</p>
+        </div>
+        <input type="email" placeholder="E-Mail" formControlName="email" [(ngModel)]="email" name="email" required>
+        <div class="error" *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched">
+            <p>Email is required</p>
+        </div>
+        <input type="password" placeholder="Password" formControlName="password" [(ngModel)]="password" name="password"
+            required>
+        <div class="error" *ngIf="signInForm.get('password')?.invalid && signInForm.get('password')?.touched">
+            <p>Password is required</p>
+        </div>
+        <input type="password" placeholder="Password confirm" formControlName="passwordConfirmed"
+            [(ngModel)]="passwordConfirmed" name="passwordConfirmed" required>
+        <div class="error"
+            *ngIf="signInForm.get('passwordConfirmed')?.invalid && signInForm.get('passwordConfirmed')?.touched">
+            <p>Password confirmation is required</p>
+        </div>
+        <!-- Error message, if passwords dont match -->
+        <div class="error" *ngIf="signInForm.hasError('mismatch') && signInForm.get('passwordConfirmed')?.touched">
+            <p>Passwords don`t match</p>
+        </div>
+        <div class="check">
+            <input type="checkbox" id="checkbox" formControlName="checkboxChecked">
+            <span>I acccept the</span><a href="" id="policy">Privacy
+                Policy</a>
+        </div>
+        <span class="error-2">* required</span>
+        <div class="btn-box"> <button type="submit" id="btn" class="not-valid"
+                [ngClass]="{'sign-in-btn': signInForm.valid}">Sign
+                up</button></div>
+    </form>
+</div>
+
+<!------------------------  Message for sign in successfull  ------------------------->
+<div class="overlay" *ngIf="signedIn">
+    <div class="message" >
+
+        <div class="content">
+            You signed in <span style="color: greenyellow;">successfully</span>!
+        </div>
+    </div>
+</div>

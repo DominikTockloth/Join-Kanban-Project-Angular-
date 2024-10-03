@@ -1,0 +1,61 @@
+<div class="main">
+    <div class="contact-scroll-box" *ngIf="(!isMobileView) || (isMobileView && !isDetailMobileView)">
+        <button (click)="openAddContactDialog()">Add new contact</button>
+        <div class="scroll-content">
+
+            <!-- Durch die gruppierten Kontakte iterieren -->
+            <div *ngFor="let group of sortedContacts | keyvalue">
+                <div class="letter">
+                    <span>{{ group.key }}</span> <!-- Letter of sorted value -->
+                    <div class="border"></div>
+                </div>
+                <div *ngFor="let contact of group.value" class="contact-box" (click)="openContactDetail(contact.id)"
+                    [ngClass]="{'selected': selectedContactId === contact.id}">
+                    <div class="initials" [ngStyle]="{'background-color': contact.bgColor}">
+                        {{ getInitials(contact.name) }}
+                    </div>
+                    <div class="contact-name">
+                        <span class="name">{{ contact.name }}</span>
+                        <span class="mail">{{ contact.email }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------------  Contact detail box starts here  -------------------------------------->
+    <div class="contact-detail-box"
+        *ngIf="(!isMobileView && contactDetailIsOpen) || (isMobileView && isDetailMobileView)">
+        <div class="headline-box">
+            <h1>Contacts</h1>
+            <div class="border"></div>
+            <span>Better with a team</span>
+            <img src="./../../assets/img/back-arrow.png" *ngIf="isMobileView" (click)="closeContactDetail()">
+        </div>
+        <div class="contact-detail-content" *ngIf="contactDetailIsOpen || isDetailMobileView">
+            <div class="contact-head">
+                <div class="initials-big" [ngStyle]="{'background-color': selectedContact.bgColor}">{{
+                    getInitials(selectedContact.name) }}</div>
+                <div class="name">
+                    <h3>{{ selectedContact.name}}</h3>
+                    <div class="edit-delete">
+                        <div (click)="openEditContactDialog(selectedContact.id)"> <img
+                                src="./../../../assets/img/pencil-frameless.png"> <span>Edit</span></div>
+                        <div (click)="openDeleteContactDialog(selectedContact.id)"><img
+                                src="./../../../assets/img/delete.png"> <span>Delete</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="information">
+                <h4>Contact information</h4>
+                <div class="mail">
+                    <span class="fs-17">E-Mail</span>
+                    <a [href]="'mailto:' + selectedContact.email" class="fs-16">{{ selectedContact.email}}</a>
+                </div>
+                <div class="phone">
+                    <span class="fs-17">Phone</span>
+                    <span class="fs-16">+ {{selectedContact.phoneNumber}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

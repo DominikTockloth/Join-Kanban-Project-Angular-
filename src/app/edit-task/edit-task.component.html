@@ -1,0 +1,79 @@
+<div class="card" *ngIf="!isEditOverlayClosed">
+    <div class="headline">
+        <h1>Edit Task</h1><span (click)="onNoClick()">X</span>
+    </div>
+    <div class="scoll-container">
+        <div class="content">
+            <span class="fs-22 ma-bo-10">Title</span>
+            <input type="text" class="ma-bo-10" [(ngModel)]="editedTitle">
+            <span class="fs-22 ma-bo-10">Description</span>
+            <textarea name="" cols="8" class="ma-bo-10" [(ngModel)]="editedDescription"></textarea>
+            <span class="fs-22 ma-bo-10">Assigned to:</span>
+            <div class="relative">
+                <input type="text" placeholder="Select contacts to assign" readonly>
+                <img src="./../../assets/img/dropdown-arrow.png" class="absolute menu-img" (click)="toggleContactList()"
+                    *ngIf="!isContactListOpen">
+                <img src="./../../assets/img/close.png" class="absolute menu-img" (click)="toggleContactList()"
+                    *ngIf="isContactListOpen">
+            </div>
+            <div class="contacts" *ngIf="isContactListOpen">
+                <div class="contact-box" *ngFor="let contact of contacts" (click)="toggleContactSelection(contact)"
+                    [ngClass]="{'selected': isSelected(contact)}">
+                    <div class="contact-info"><span class="avatar"
+                            [ngStyle]="{'background-color': contact.bgColor}">{{getInitials(contact.name)}}</span>
+                        <p class="name">{{capitalizeFirstLetters(contact.name)}}</p>
+                    </div>
+                    <input type="checkbox" [checked]="isSelected(contact)"
+                        (click)="toggleContactSelection(contact, $event)">
+                </div>
+            </div>
+            <div class="selected-contacts">
+
+                <span class="avatar" [ngStyle]="{'background-color': contact.bgColor}"
+                    *ngFor="let contact of selectedTask.contacts">{{getInitials(contact.name)}}</span>
+
+            </div>
+            <span class="fs-22 ma-bo-10 ma-to-10">Due date</span>
+            <input type="date" class="ma-bo-10" [attr.min]="minDate" [(ngModel)]="editedDate"
+                (change)="onDateChange($event)">
+            <span class="fs-22 ma-bo-10 ma-to-10">Priority</span>
+            <div class="prio-btn">
+                <button [ngClass]="{'low-selected': editedPrioSelected === 'low' || prioSelected === 'low'}"
+                    (click)="togglePriority('low')"> Low <img src="./../../assets/img/low_white.svg"
+                        *ngIf="prioSelected === 'low' || editedPrioSelected === 'low'"><img
+                        src="./../../assets/img/low_green.svg"
+                        *ngIf="prioSelected !== 'low' || editedPrioSelected !== 'low'"></button>
+                <button [ngClass]="{'medium-selected': editedPrioSelected === 'medium' || prioSelected === 'medium'}"
+                    (click)="togglePriority('medium')">Medium <img src="./../../assets/img/medium_white.svg"
+                        *ngIf="prioSelected === 'medium' || editedPrioSelected === 'medium'"><img
+                        src="./../../assets/img/medium_yellow.svg"
+                        *ngIf="prioSelected !== 'medium' || editedPrioSelected !== 'medium'"></button>
+                <button [ngClass]="{'urgent-selected': editedPrioSelected === 'urgent' || prioSelected === 'urgent'}"
+                    (click)="togglePriority('urgent')">Urgent <img src="./../../assets/img/urgent_white.svg"
+                        *ngIf="prioSelected === 'urgent' || editedPrioSelected === 'urgent'"><img
+                        src="./../../assets/img/urgent_red.svg"
+                        *ngIf="prioSelected !== 'urgent' || editedPrioSelected !== 'urgent'"></button>
+            </div>
+            <span class="fs-22 ma-to-10">Subtasks</span>
+            <span *ngIf="!selectedTask.subtasks" class="no-subtask">No subtasks to do!!</span>
+            <div class="sub-input relative"><input type="text" placeholder="Add new subtask" class="relative"
+                    #subtaskInput><img src="./../../assets/img/plus-button.png" class="absolute menu-img"
+                    (click)="addSubtask()">
+            </div>
+            <div class="subtasks" *ngFor="let subtask of selectedTask.subtasks">
+                <li> <span>- {{subtask}}</span><img src="./../../assets/img/delete.png"
+                        (click)="removeSubtask(subtask)"></li>
+            </div>
+        </div>
+    </div>
+    <div class="buttons"><button (click)="editTask(selectedTask.id!)">Save <img
+                src="./../../assets/img/checked.png"></button></div>
+</div>
+
+<!----------------------------  Message for adding task successfully  ------------------------------------->
+<div class="overlay" *ngIf="isTaskEdited">
+    <div class="message">
+        <div class="content">Task<span class="green">successfully</span>edited !
+        </div>
+    </div>
+</div>

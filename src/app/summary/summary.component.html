@@ -1,0 +1,51 @@
+<div class="main">
+    <div class="headline">
+        <h1>Summary</h1>
+        <div class="border"></div><span>Everything in a nutshell !</span>
+    </div>
+    <div class="content">
+        <div class="left">
+            <div class="task-status">
+                <div class="field" routerLink="/main/board"><span class="fs-55">{{tasks.length}}</span><span
+                        class="fs-20">Tasks in
+                        Board</span></div>
+                <div class="field" routerLink="/main/board"><span class="fs-55">{{statusInProgress.length}}</span><span
+                        class="fs-20">Tasks in
+                        Progress</span></div>
+                <div class="field" routerLink="/main/board"><span class="fs-55">{{statusAwaiting.length}}</span><span
+                        class="fs-20">Tasks
+                        awaiting feedback</span></div>
+            </div>
+            <div class="urgent-box" routerLink="/main/board">
+                <div class="urgent-count">
+                    <img src="./../../assets/img/urgent-red.png">
+                    <div class="count">
+                        <span class="fs-55">{{urgentArray.length}}</span><span class="fs-20">Urgent</span>
+                    </div>
+                </div>
+                <div class="border"></div>
+                <div class="deadline" routerLink="/main/board">
+                    <span class="fs-25">{{ firstPrioDate | date:'dd - MM - yyyy' }}</span>
+                    <span class="fs-20">Upcoming Deadline</span>
+                </div>
+
+            </div>
+            <div class="done">
+                <div class="field-1 w-100" routerLink="/main/board"><img src="./../../assets/img/pencil.png">
+                    <div class="column"><span class="fs-55">{{statusToDo.length}}</span><span class="fs-20">To-Do</span>
+                    </div>
+                </div>
+                <div class="field-1 w-100" routerLink="/main/board"><img src="./../../assets/img/checked.png">
+                    <div class="column"><span class="fs-55">{{statusDone.length}}</span><span class="fs-20">Done</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <span class="greet">{{ greetUserByTime() }}</span>
+            <span class="greet-user" *ngIf="loggedInUser">{{loggedInUser}}</span>
+            <span class="greet-user" *ngIf="guestLoggedIn">Guest</span>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,48 @@
+<div class="top" [ngClass]="{hidden : isContactAdded}">
+    <div class="headline">
+        <h2>Add Contact</h2>
+        <div class="close" (click)="onNoClick()">X</div>
+    </div>
+    <span>Tasks are better in a team!</span>
+    <div class="border"></div>
+    <img src="./../../assets/img/contact-person.png" class="img">
+</div>
+<form class="bottom" [formGroup]="signInForm" (ngSubmit)="addContact()" [ngClass]="{hidden : isContactAdded}">
+    <mat-dialog-content>
+        <div class="input-box">
+            <input type="text" placeholder="Name" formControlName="name" [(ngModel)]="name" name="name" required><img
+                src="./../../assets/img/person.png">
+        </div>
+        <div class="error" *ngIf="signInForm.get('name')?.invalid && signInForm.get('name')?.touched">
+            <p>Name is required</p>
+        </div>
+        <div class="input-box">
+            <input type="email" placeholder="E-Mail" formControlName="email" [(ngModel)]="email" name="email"
+                required><img src="./../../assets/img/mail.png">
+        </div>
+        <div class="error" *ngIf="signInForm.get('email')?.invalid && signInForm.get('email')?.touched">
+            <p>E-Mail is required</p>
+        </div>
+        <div class="input-box">
+            <input type="number" placeholder="Phone" formControlName="phoneNumber" [(ngModel)]="phoneNumber"
+                name="phoneNumber" required><img src="./../../assets/img/phone.png">
+        </div>
+        <div class="error" *ngIf="signInForm.get('phoneNumber')?.invalid && signInForm.get('phoneNumber')?.touched">
+            <p>Phonenumber is required</p>
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="close-btn" mat-button (click)="onNoClick()">Clear</button>
+        <button class="add-btn" mat-button type="submit" [disabled]="signInForm.invalid">Create Contact</button>
+    </mat-dialog-actions>
+</form>
+
+<div class="message" *ngIf="isContactAdded">
+    <div>
+        <div class="content">
+            Contact<span style="color: greenyellow;">successfully</span> added!
+        </div>
+    </div>
+</div>

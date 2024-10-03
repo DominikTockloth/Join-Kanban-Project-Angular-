@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+$bg-color: #f6f7f8;
+$color: #D1D1D1;
+$blue: #29ABE2;
+$dark-blue: #293647;
+
+body {
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

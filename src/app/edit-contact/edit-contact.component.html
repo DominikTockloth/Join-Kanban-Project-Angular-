@@ -1,0 +1,52 @@
+<div class="top" [ngClass]="{'hidden': isContactEdited}">
+    <div class="headline">
+        <h2>Edit Contact</h2>
+        <div class="close" (click)="onNoClick()">X</div>
+    </div>
+    <span>Tasks are better in a team!</span>
+    <div class="border"></div>
+    <div class="avatar" [ngStyle]="{'background-color': selectedContact.bgColor}"><span class="initials">{{
+            getInitials(selectedContact.name ||
+            '') }}</span>
+    </div>
+</div>
+<form class="bottom" (ngSubmit)="editContact(selectedContact.id)" [ngClass]="{'hidden': isContactEdited}">
+    <mat-dialog-content>
+        <div class="input-box">
+            <input type="text" [(ngModel)]="editedName" required [ngModelOptions]="{standalone: true}">
+            <img src="./../../assets/img/person.png">
+        </div>
+        <div class="error" *ngIf="!editedName.length">
+            <p>Name is required</p>
+        </div>
+        <div class="input-box">
+            <input type="email" [(ngModel)]="editedEmail" required [ngModelOptions]="{standalone: true}">
+            <img src="./../../assets/img/mail.png">
+        </div>
+        <div class="error" *ngIf="!editedEmail">
+            <p>E-Mail is required</p>
+        </div>
+        <div class="input-box">
+            <input type="number" [(ngModel)]="editedPhoneNumber" required [ngModelOptions]="{standalone: true}"><img
+                src="./../../assets/img/phone.png">
+        </div>
+        <div class="error" *ngIf="!editedPhoneNumber">
+            <p>Phone number is required</p>
+        </div>
+
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="close-btn" mat-button (click)="onNoClick()">Clear</button>
+        <button class="add-btn" mat-button type="submit" [disabled]="!isFormValid()">Edit Contact</button>
+    </mat-dialog-actions>
+</form>
+
+<!----------------------------  Message animation  -------------------------->
+<div class="message" *ngIf="isContactEdited">
+    <div>
+        <div class="content">
+            Contact<span style="color: greenyellow;">successfully</span> edited!
+        </div>
+    </div>
+</div>

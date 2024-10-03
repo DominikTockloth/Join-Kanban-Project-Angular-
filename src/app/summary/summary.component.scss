@@ -1,0 +1,410 @@
+$bg-color: #f6f7f8;
+$color: #D1D1D1;
+$blue: #29ABE2;
+$dark-blue: #293647;
+
+.main {
+    position: absolute;
+    top: 100px;
+    left: 250px;
+    height: calc(100vh - 100px);
+    padding: 40px;
+
+    .headline {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+
+        h1 {
+            font-size: 61px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .border {
+            height: 65px;
+            width: 2px;
+            background-color: $blue;
+        }
+
+        span {
+            font-size: 27px;
+            color: $dark-blue;
+        }
+    }
+
+    .content {
+        display: flex;
+        width: 100%;
+        margin-top: 50px;
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .task-status {
+                display: flex;
+                gap: 35px;
+            }
+
+            .urgent-box {
+                border-radius: 20px;
+                cursor: pointer;
+                box-shadow: 4px 0px 6px 4px rgba(0, 0, 0, 0.05);
+                display: flex;
+                justify-content: space-evenly;
+                padding: 30px;
+                align-items: center;
+                background-color: white;
+
+                &:hover {
+                    color: white;
+                    background-color: $dark-blue;
+                }
+
+                .border {
+                    width: 2px;
+                    height: 110px;
+                    background-color: $dark-blue;
+                }
+            }
+
+            .urgent-count {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+                cursor: pointer;
+
+                .count {
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                    gap: 10px;
+                }
+            }
+
+            .deadline {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .done {
+                width: 100%;
+                display: flex;
+                gap: 35px;
+            }
+
+        }
+
+        .right {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 30px;
+
+            .greet {
+                color: #293647;
+                font-size: 52px;
+                font-weight: 500;
+            }
+
+            .greet-user {
+                color: $blue;
+                font-size: 65px;
+                font-weight: 700;
+            }
+        }
+
+        .field {
+            padding: 30px 60px;
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 4px 0px 6px 4px rgba(0, 0, 0, 0.05);
+
+            &:hover {
+                color: white;
+                background-color: $dark-blue;
+            }
+        }
+
+        .field-1 {
+            padding: 30px 60px;
+            background-color: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 4px 0px 6px 4px rgba(0, 0, 0, 0.05);
+
+            &:hover {
+                color: white;
+                background-color: $dark-blue;
+            }
+
+            img {
+                height: 70px;
+                width: 70px;
+                object-fit: cover;
+            }
+
+            .column {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.fs-55 {
+    font-size: 55px;
+    font-weight: 600;
+}
+
+.fs-25 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.fs-20 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/*******************************    Scrollbar for WebKit browsers (Chrome, Safari, Edge)   **************************************/
+::-webkit-scrollbar {
+    width: 10px;
+    /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+    /* Scrollbar background */
+    border-radius: 8px;
+    /* Rounded edges */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: $blue;
+    /* Scrollbar handle */
+    border-radius: 8px;
+    /* Rounded edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: $dark-blue;
+    cursor: pointer;
+}
+
+/* Remove the scrollbar buttons (arrows) */
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Make the scrollbar thinner */
+
+
+
+/* Additional cross-browser consistency (for older browsers) */
+html {
+    scrollbar-face-color: blue;
+    scrollbar-track-color: white;
+}
+
+/* Custom styling for the scrollbar thumb on hover in all browsers */
+body::-webkit-scrollbar-thumb:active {
+    background-color: darkblue;
+    /* Darker thumb when active */
+}
+
+/**************************************  Responsive design summary  *******************************/
+@media(max-width:1346px) {
+    .main {
+        overflow-x: hidden !important;
+        margin-bottom: 40px !important;
+    }
+
+    .content {
+        flex-direction: column-reverse !important;
+        margin-bottom: 65px !important;
+
+    }
+
+    .right {
+        align-items: center !important;
+        justify-content: flex-start !important;
+        margin-bottom: 20px !important;
+        padding-left: unset !important;
+        gap: 10px !important;
+    }
+}
+
+@media(max-width:1250px) {
+    .greet {
+        font-size: 45px !important;
+    }
+
+    .greet-user {
+        font-size: 60px !important;
+    }
+}
+
+@media(max-width:950px) {
+    .main {
+        margin-bottom: unset !important;
+        left: 0 !important;
+        width: 100% !important;
+        padding: 10px !important;
+    }
+
+    .content {
+        padding-right: 45px !important;
+        align-items: center !important;
+    }
+
+    .left {
+        margin-bottom: 100px !important;
+        padding-right: 30px !important;
+    }
+
+    .greet {
+        font-size: 38px !important;
+    }
+
+    .greet-user {
+        font-size: 52px !important;
+    }
+
+    .field {
+        padding: 30px 30px !important;
+    }
+
+    .field-1 {
+        width: unset !important;
+    }
+
+    .task-status {
+        justify-content: space-evenly !important;
+    }
+
+    .done {
+        width: unset !important;
+        justify-content: space-evenly !important;
+        gap: unset !important;
+    }
+}
+
+@media(max-width:800px) {
+    .headline {
+        .border {
+            display: none !important;
+        }
+
+        span {
+            display: none !important;
+        }
+    }
+
+    .fs-55 {
+        font-size: 40px !important;
+    }
+
+    .fs-20 {
+        font-size: 16px !important;
+    }
+
+    .urgent-count {
+        img {
+            height: 40px !important;
+        }
+
+        .count {
+            gap: 0 !important;
+        }
+    }
+
+    .field-1 {
+        img {
+            height: 55px !important;
+            width: 55px !important;
+        }
+    }
+}
+
+@media(max-width:500px) {
+    h1 {
+        font-size: 50px !important;
+    }
+
+    .fs-55 {
+        font-size: 30px !important;
+    }
+
+    .fs-20 {
+        font-size: 14px !important;
+    }
+
+    .fs-25 {
+        font-size: 16px !important;
+    }
+
+    .greet {
+        font-size: 20px !important;
+    }
+
+    .greet-user {
+        font-size: 30px !important;
+    }
+
+    .urgent-box {
+        padding: 15px !important;
+    }
+
+    .field-1 {
+        padding: 30px 30px !important;
+    }
+
+    .task-status {
+        gap: 12px !important;
+    }
+
+    .field {
+        padding: 20px !important;
+    }
+
+    .field-1 {
+        padding: 25px !important;
+    }
+}
+
+@media(max-width:350px) {
+    .greet {
+        font-size: 24px !important;
+    }
+
+    .greet-user {
+        font-size: 31px !important;
+    }
+
+    .field-1 {
+        img {
+            height: 45px !important;
+            width: 45px !important;
+        }
+    }
+}

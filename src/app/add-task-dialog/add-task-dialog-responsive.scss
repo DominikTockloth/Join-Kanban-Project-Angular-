@@ -1,0 +1,112 @@
+@media(max-width:500px) {
+    .main {
+        width: 350px !important;
+    }
+
+    h1 {
+        font-size: 45px !important;
+    }
+
+    .contacts {
+        input {
+            width: 92% !important;
+        }
+    }
+
+    .prio-btn {
+        width: 100px !important;
+        font-size: 15px !important;
+    }
+
+    .contact-box {
+        input {
+            width: unset !important;
+        }
+    }
+}
+
+@media(max-width:425px) {
+    .main {
+        width: 300px !important;
+
+        input,
+        textarea {
+            font-size: 15px !important;
+
+            &::placeholder {
+                font-size: 15px !important;
+            }
+        }
+    }
+
+    h1 {
+        font-size: 35px !important;
+    }
+
+    .black {
+        font-size: 15px !important;
+    }
+
+    .cont-name {
+        font-size: 15px !important;
+    }
+
+    .avatar {
+        height: 35px !important;
+        width: 35px !important;
+        font-size: 15px !important;
+    }
+
+    .arrow {
+        top: 82px !important;
+        right: 15px !important;
+        height: 15px !important;
+        width: 15px !important;
+    }
+
+    .prio-btn {
+        width: 87px !important;
+        font-size: 13px !important;
+    }
+
+    .drop-menu-category {
+        li {
+            font-size: 15px !important;
+        }
+    }
+
+    .plus-sign {
+        top: 26px !important;
+    }
+
+    .sub-content {
+        font-size: 15px !important;
+        li{
+            margin-left: 10px !important;
+        }
+    }
+
+    .icons {
+        height: 15px !important;
+        width: 15px !important;
+        margin-right: 35px !important;
+    }
+      .content{
+         font-size: 17px !important;
+        }
+    
+}
+@media(max-width:366px){
+    .main{
+        width: 280px !important;
+    }
+    form{
+        padding: 5px !important;
+    }
+    .prio-btn{
+        img{
+            height: 6px !important;
+            object-fit: contain !important;
+        }
+    }
+}

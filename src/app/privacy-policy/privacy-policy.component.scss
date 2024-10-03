@@ -1,0 +1,52 @@
+.main {
+    position: absolute;
+    left: 250px;
+    top: 100px;
+    padding-top: 100px;
+    padding-left: 250px;
+    overflow: scroll;
+    padding: 0px 25px;
+    max-height: calc(100vh - 100px);
+    scroll-behavior: smooth;
+}
+
+/****************************************  Responsive design  ***********************************************************************/
+@media(max-width:950px) {
+    .main {
+        left: 0px !important;
+        max-height: calc(100vh - 190px) !important;
+    }
+}
+
+@media(max-width:380px) {
+    .main {
+        padding: 0px 10px !important;
+
+        h1 {
+            font-size: 28px !important;
+        }
+    }
+}
+
+/**************************************** Style for scrollbar ***********************************************************************/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #29ABE2;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}

@@ -1,0 +1,169 @@
+/*************************************  Responsive style for contacts component  ***********************/
+@media(max-width:1360px) {
+    .contact-scroll-box {
+        padding: 20px !important;
+        width: 320px !important;
+    }
+
+    .contact-name {
+        .name {
+            font-size: 22px !important;
+        }
+    }
+
+    .name {
+        h3 {
+            font-size: 43px !important;
+        }
+    }
+
+    .initials-big {
+        font-size: 40px !important;
+        padding: 25px !important;
+    }
+}
+
+@media(max-width:1260px) {
+    .contact-scroll-box {
+        width: 280px !important;
+
+        .contact-name {
+            .name {
+                font-size: 17px !important;
+            }
+        }
+    }
+
+    .headline-box {
+        span {
+            display: none !important;
+        }
+
+        .border {
+            display: none !important;
+        }
+    }
+
+    .name {
+        h3 {
+            font-size: 35px !important;
+        }
+    }
+
+    .initials-big {
+        font-size: 35px !important;
+        padding: 20px !important;
+    }
+}
+
+@media(max-width:1130px) {
+    .contact-detail-box {
+        padding: 60px 30px !important;
+    }
+
+    .name {
+        h3 {
+            font-size: 30px !important;
+        }
+    }
+}
+
+@media(max-width:1000px) {
+    .contact-scroll-box {
+        width: 230px !important;
+    }
+
+    .contact-name {
+        .mail {
+            font-size: 13px !important;
+        }
+    }
+
+    .initials {
+        font-size: 14px !important;
+        padding: 10px !important;
+    }
+}
+
+@media(max-width:950px) {
+    .main {
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+    }
+
+    .contact-scroll-box {
+        height: calc(100vh - 250px) !important;
+    }
+}
+
+@media(max-width:690px) {
+    .headline-box {
+        gap: 200px !important;
+    }
+
+    .contact-scroll-box {
+        position: absolute !important;
+        width: 100% !important;
+        padding: 0px !important;
+        overflow-x: scroll !important;
+        height: calc(100vh - 210px) !important;
+
+        button {
+            width: unset !important;
+        }
+
+        .scroll-content {
+            width: 85% !important;
+            max-height: calc(100vh - 320px) !important;
+        }
+
+    }
+}
+
+@media(max-width:510px) {
+    .headline-box {
+        gap: 100px !important;
+    }
+}
+
+@media(max-width:410px) {
+    .headline-box {
+        gap: 85px !important;
+    }
+
+    h1 {
+        font-size: 45px !important;
+    }
+
+    .information {
+        h4 {
+            font-size: 30px !important;
+        }
+    }
+
+    .edit-delete {
+        gap: 20px !important;
+
+        span {
+            font-size: 17px !important;
+        }
+
+        img {
+            height: 15px !important;
+            width: 15px !important;
+            object-fit: contain !important;
+        }
+    }
+
+    .initials-big {
+        font-size: 25px !important;
+        width: 45px !important;
+    }
+
+    .name {
+        h3 {
+            font-size: 25px !important;
+        }
+    }
+}

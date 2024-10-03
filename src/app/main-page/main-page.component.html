@@ -1,0 +1,34 @@
+<div class="main">
+    <header>
+        <div class="headline">
+            <h2>Kanban Project Management Tool</h2>
+        </div>
+        <div class="avatar-box"><img src="./../../assets/img/help.png" routerLink="/main/help">
+            <div class="avatar" *ngIf="loggedInUser" (click)="toggleMenu()">{{ getInitials(loggedInUser) }}</div>
+            <div class="avatar" *ngIf="!loggedInUser"(click)="toggleMenu()">G</div>
+        </div>
+        <div class="drop-menu" *ngIf="isMenuOpen">
+            <span (click)="toPrivacyPolicy()">Privacy Policy</span>
+            <span (click)="toLegalNotice()">Legal Notice</span>
+            <span (click)="logOut()">Log out</span>
+        </div>
+    </header>
+
+    <aside>
+        <img src="./../../assets/img/logo-white.png" id="logo">
+        <div class="link-box">
+            <div class="link" routerLink="/main/summary" routerLinkActive="active-link"><img src="./../../assets/img/summary.png"><span>Summary</span>
+            </div>
+            <div class="link" routerLink="/main/tasks" routerLinkActive="active-link"><img src="./../../assets/img/addTask.png"><span>Add Task</span>
+            </div>
+            <div class="link" routerLink="/main/board" routerLinkActive="active-link"><img src="./../../assets/img/board.png"><span>Board</span></div>
+            <div class="link" routerLink="/main/contacts" routerLinkActive="active-link"><img
+                    src="./../../assets/img/contact.png"><span>Contacts</span></div>
+        </div>
+        <div class="policy-box">
+            <span routerLink="/main/privacy">Privacy Policy</span>
+            <span routerLink="/main/legal">Legal Notice</span>
+        </div>
+    </aside>
+    <router-outlet></router-outlet>
+</div>

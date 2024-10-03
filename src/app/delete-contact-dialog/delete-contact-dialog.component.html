@@ -1,0 +1,17 @@
+<div class="main" [ngClass]="{'hidden': isContactDeleted}">
+    <div class="box">
+        <div class="content">
+            <span>Do you really want to <span class="delete">delete</span> this contact?</span>
+            <div class="btn"><button (click)="deleteContact(selectedContact.id)" class="yes">Yes</button>
+                <button (click)="onNoClick()" class="no">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="message" *ngIf="isContactDeleted">
+    <div>
+        <div class="content">
+            Contact<span style="color: greenyellow;">successfully</span> deleted!
+        </div>
+    </div>
+</div>
